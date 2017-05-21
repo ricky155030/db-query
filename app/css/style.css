@@ -1,0 +1,9 @@
+body {
+  background-color: #fafafa;
+}
+.ui.visible.sidebar.thin.visible ~ .pusher {
+  width: calc(100% - 150px);
+}
+.ui.visible.sidebar.visible ~ .pusher {
+  width: calc(100% - 260px);
+}
