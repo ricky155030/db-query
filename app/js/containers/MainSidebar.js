@@ -33,7 +33,7 @@ class MainSidebar extends React.Component {
           Query
         </Menu.Item>
         <Menu.Item
-          onClick={() => this.context.router.push('/File')}
+          onClick={() => this.context.router.push('/Template')}
         >
           Template
         </Menu.Item>

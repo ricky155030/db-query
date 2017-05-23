@@ -8,6 +8,7 @@ import File from '../containers/File'
 export default (
   <Route path="/" component={withRouter(App)}>
     <Route path="/query" component={withRouter(Query)} />
-    <Route path="/file" component={withRouter(File)} />
+    <Route path="/template" component={withRouter(File)} />
+    <Route path="/template/:tab" component={withRouter(File)} />
   </Route>
 )

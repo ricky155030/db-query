@@ -9,6 +9,11 @@ class Create extends React.Component {
   }
 
   render() {
+    const {
+      query
+    } = this.props
+    console.log(query)
+
     return (
       <div>
         <Header as="h3">
@@ -31,7 +36,10 @@ class Create extends React.Component {
           </Form.Group>
           <Form.Field>
             <label>Query</label>
-            <TextArea placeholder="Your sql query here" />
+            <TextArea 
+              value={query}
+              placeholder="Your sql query here" 
+            />
           </Form.Field>
         </Form>
         <br />
@@ -44,4 +52,16 @@ class Create extends React.Component {
   }
 }
 
-export default Create
+const mapStateToProps = state => {
+  return {
+    query: state.sql.query
+  }
+}
+
+const dispatchProps = dispatch => {
+  return {
+    setCreateQuery: query => dispatch(setCreateQuery(query))
+  }
+}
+
+export default connect(mapStateToProps, dispatchProps)(Create)

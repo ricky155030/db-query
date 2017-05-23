@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Icon, Header, Form, TextArea, Button, Divider } from 'semantic-ui-react'
 import Select from 'react-select'
+import { setCreateQuery } from '../actions/sql'
 
 const options = [
   { value: 'MES2', label: 'MES2' },
@@ -12,7 +13,8 @@ class Query extends React.Component {
   state = {
     db: null,
     dbs: [],
-    multi: false
+    multi: false,
+    query: ''
   }
 
   constructor(props) {
@@ -25,11 +27,23 @@ class Query extends React.Component {
 
   handleSelectionDBType = isMulti => this.setState({ multi: isMulti })
 
+  handleTextAreaChange = (e, { value }) => this.setState({ query: value })
+
+  handleCreateNewTemplate = () => {
+    const {
+      query
+    } = this.state
+
+    this.props.setCreateQuery(query)
+    this.props.router.push('/template/Create')
+  }
+
   render() {
     const {
       db,
       dbs,
-      multi
+      multi,
+      query
     } = this.state
 
     return (
@@ -68,10 +82,22 @@ class Query extends React.Component {
         <Divider horizontal hidden />
         <label>Query</label>
         <Form>
-          <TextArea placeholder="Your sql query here" />
+          <TextArea 
+            placeholder="Your sql query here" 
+            onChange={this.handleTextAreaChange}
+            value={query}
+          />
         </Form>
         <br />
-        <Button color="blue" floated="right">
+        <Button
+          onClick={this.handleCreateNewTemplate}
+        >
+          Create as New Template
+        </Button>
+        <Button 
+          color="blue" 
+          floated="right"
+        >
           Submit
         </Button>
       </div>
@@ -79,4 +105,16 @@ class Query extends React.Component {
   }
 }
 
-export default Query
+const mapStateToProps = dispatch => {
+  return {
+
+  }
+}
+
+const dispatchProps = dispatch => {
+  return {
+    setCreateQuery: query => dispatch(setCreateQuery(query))
+  }
+}
+
+export default connect(mapStateToProps, dispatchProps)(Query)

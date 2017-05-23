@@ -12,6 +12,11 @@ class Query extends React.Component {
   constructor(props) {
     super(props)
   }
+  
+  componentWillMount() {
+    const tab = this.props.routeParams.tab
+    this.setState({ tab })
+  }
 
   handleClickTab = (e, { name }) => this.setState({ tab: name })
 
