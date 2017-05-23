@@ -8,9 +8,9 @@ import RootReducer from './reducers'
 import style from '../css/style.css'
 import Root from './containers/Root';
 import { browserHistory } from 'react-router'
-import 'materialize-css/dist/css/materialize.min.css'
 import 'semantic-ui-css/semantic.css'
 import 'react-select/dist/react-select.min.css'
+import '../css/color.css'
 
 const logger = createLogger()
 const createStoreMiddleware = applyMiddleware(

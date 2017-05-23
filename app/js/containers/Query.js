@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Header, Form, TextArea, Button, Divider } from 'semantic-ui-react'
+import { Icon, Header, Form, TextArea, Button, Divider } from 'semantic-ui-react'
 import Select from 'react-select'
 
 const options = [
@@ -35,16 +35,19 @@ class Query extends React.Component {
     return (
       <div>
         <Header as="h2">
-          SQL Query
-          <Header.Subheader>
-            Query sql with custom statement.
-          </Header.Subheader>
+          <Icon name="search" />
+          <Header.Content>
+            SQL Query
+            <Header.Subheader>
+              Query sql with custom statement.
+            </Header.Subheader>
+          </Header.Content>
         </Header>
         <Divider horizontal hidden />
   			<Button.Group size="mini">
-    			<Button positive={!multi} onClick={() => this.handleSelectionDBType(false)}>Single</Button>
+    			<Button className={!multi && "blue"} onClick={() => this.handleSelectionDBType(false)}>Single</Button>
     			<Button.Or />
-    			<Button positive={multi} onClick={() => this.handleSelectionDBType(true)}>Multiple</Button>
+    			<Button className={multi && "blue"} onClick={() => this.handleSelectionDBType(true)}>Multiple</Button>
   			</Button.Group>
         <Divider horizontal hidden />
         <label>Database</label>
@@ -68,7 +71,7 @@ class Query extends React.Component {
           <TextArea placeholder="Your sql query here" />
         </Form>
         <br />
-        <Button color="teal" floated="right">
+        <Button color="blue" floated="right">
           Submit
         </Button>
       </div>
