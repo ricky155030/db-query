@@ -16,13 +16,10 @@ class Navigator extends React.Component {
     return (
       <Menu fixed="top" borderless>
         <Menu.Item icon onClick={toggleSidebar}>
-          <Icon className="grey-text" name="content" />
-        </Menu.Item>
-        <Menu.Item icon>
-          <Icon className="grey-text" name="mail" />
+          <Icon className="materialize-grey-text" name="content" />
         </Menu.Item>
         <Menu.Menu position="right">
-          <Menu.Item className="grey-text">
+          <Menu.Item className="materialize-grey-text">
             <Icon name="user" /> Profile
           </Menu.Item>
         </Menu.Menu>

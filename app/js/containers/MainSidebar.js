@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Sidebar, Menu } from 'semantic-ui-react'
+import { Popup, Icon, Sidebar, Menu } from 'semantic-ui-react'
 
 class MainSidebar extends React.Component {
   static contextTypes = {
@@ -13,39 +13,58 @@ class MainSidebar extends React.Component {
 
   render() {
     const {
-      isOpen
+      isMinify,
+      pathname
     } = this.props
+
+    const width = isMinify ? "very thin" : "thin"
 
     return (
       <Sidebar 
-        className="grey darken-2"
+        visible
+        className="materialize-blue-grey darken-2"
         animation="push" 
-        visible={isOpen} 
         as={Menu} 
         inverted 
-        width="thin" 
+        width={width}
         vertical 
         borderless
+        icon={isMinify}
       >
         <Menu.Item
-          onClick={() => this.context.router.push('/Query')}
+          active={pathname.toLowerCase().indexOf('/query') != -1}
+          onClick={() => this.context.router.push('/query')}
+          title="SQL Query"
         >
-          Query
+          <Icon name="search" />
+          {
+            !isMinify && 
+            <span>Query</span>
+          }
         </Menu.Item>
         <Menu.Item
-          onClick={() => this.context.router.push('/Template')}
+          active={pathname.toLowerCase().indexOf('/template') != -1}
+          onClick={() => this.context.router.push('/template')}
+          title="Template"
         >
-          Template
+          <Icon name="file" />
+          {
+            !isMinify && 
+            <span>Template</span>
+          }
         </Menu.Item>
-        <Menu.Item>History</Menu.Item>
       </Sidebar>
     )
   }
 }
 
 const mapStateToProps = state => {
+  const {
+    pathname
+  } = state.routing.locationBeforeTransitions
   return {
-    isOpen: state.sidebar.isOpen
+    isMinify: state.sidebar.isMinify,
+    pathname
   }
 }
 

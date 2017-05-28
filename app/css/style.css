@@ -1,9 +1,18 @@
 body {
   background-color: #fafafa;
 }
+.ui.visible.sidebar.very.thin.visible ~ .pusher {
+  width: calc(100% - 60px);
+}
 .ui.visible.sidebar.thin.visible ~ .pusher {
   width: calc(100% - 150px);
 }
 .ui.visible.sidebar.visible ~ .pusher {
   width: calc(100% - 260px);
+}
+.ui.push.sidebar {
+  transition: all 0.4s;
+}
+.pushable > .pusher {
+  transition: all 0.4s;
 }

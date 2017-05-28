@@ -12,7 +12,6 @@ class Create extends React.Component {
     const {
       query
     } = this.props
-    console.log(query)
 
     return (
       <div>
@@ -43,7 +42,7 @@ class Create extends React.Component {
           </Form.Field>
         </Form>
         <br />
-        <Button color="blue" floated="right">
+        <Button floated="right">
           Save
         </Button>
         <Divider horizontal hidden clearing />
