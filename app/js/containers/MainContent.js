@@ -1,5 +1,7 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { Route, withRouter, Switch } from 'react-router-dom'
+import Query from './Query'
+import Template from './Template'
 
 class MainContent extends React.Component {
   constructor(props) {
@@ -9,18 +11,15 @@ class MainContent extends React.Component {
   render() {
     return (
       <div style={{ marginTop: '41px' }}>
-        { this.props.children }
+        <Switch>
+          <Route exact path="/query" component={withRouter(Query)} />
+          <Route exact path="/query/:id" component={withRouter(Query)} />
+          <Route path="/template" component={withRouter(Template)} />
+          <Route component={() => <span>Not Found</span>} />
+        </Switch>
       </div>
     )
   }
 }
 
-const mapStateToProps = state => {
-  return {}
-}
-
-const mapDispatchToProps = dispatch => {
-  return {}
-}
-
-export default MainContent
+export default withRouter(MainContent)

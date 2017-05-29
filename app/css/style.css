@@ -12,6 +12,9 @@ body {
 }
 .ui.push.sidebar {
   transition: all 0.4s;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .pushable > .pusher {
   transition: all 0.4s;

@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import { Popup, Icon, Sidebar, Menu } from 'semantic-ui-react'
 
 class MainSidebar extends React.Component {
@@ -9,12 +10,12 @@ class MainSidebar extends React.Component {
 
   constructor(props) {
     super(props)
-  }
-
+  } 
   render() {
     const {
-      isMinify,
-      pathname
+      history,
+      location,
+      isMinify
     } = this.props
 
     const width = isMinify ? "very thin" : "thin"
@@ -32,19 +33,19 @@ class MainSidebar extends React.Component {
         icon={isMinify}
       >
         <Menu.Item
-          active={pathname.toLowerCase().indexOf('/query') != -1}
-          onClick={() => this.context.router.push('/query')}
+          active={location.pathname.indexOf('/query') != -1}
+          onClick={() => history.push('/query')}
           title="SQL Query"
         >
-          <Icon name="search" />
+          <Icon name="database" />
           {
             !isMinify && 
             <span>Query</span>
           }
         </Menu.Item>
         <Menu.Item
-          active={pathname.toLowerCase().indexOf('/template') != -1}
-          onClick={() => this.context.router.push('/template')}
+          active={location.pathname.indexOf('/template') != -1}
+          onClick={() => history.push('/template/list')}
           title="Template"
         >
           <Icon name="file" />
@@ -53,18 +54,25 @@ class MainSidebar extends React.Component {
             <span>Template</span>
           }
         </Menu.Item>
+        <Menu.Item
+          active={location.pathname.indexOf('/history') != -1}
+          onClick={() => history.push('/history')}
+          title="History"
+        >
+          <Icon name="history" />
+          {
+            !isMinify && 
+            <span>History</span>
+          }
+        </Menu.Item>
       </Sidebar>
     )
   }
 }
 
 const mapStateToProps = state => {
-  const {
-    pathname
-  } = state.routing.locationBeforeTransitions
   return {
-    isMinify: state.sidebar.isMinify,
-    pathname
+    isMinify: state.sidebar.isMinify
   }
 }
 
@@ -72,4 +80,4 @@ const mapDispatchToProps = dispatch => {
   return {}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainSidebar)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MainSidebar))
