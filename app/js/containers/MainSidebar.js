@@ -32,6 +32,13 @@ class MainSidebar extends React.Component {
         borderless
         icon={isMinify}
       >
+        <Menu.Item header className="materialize-blue-grey lighten-4 materialize-blue-grey-text text-darken-2">
+          {
+            isMinify ? 
+            <span>SQL</span> :
+            <span className="animated fadeIn">SQL Manager</span>
+          }
+        </Menu.Item>
         <Menu.Item
           active={location.pathname.indexOf('/query') != -1}
           onClick={() => history.push('/query')}
@@ -40,7 +47,7 @@ class MainSidebar extends React.Component {
           <Icon name="database" />
           {
             !isMinify && 
-            <span>Query</span>
+            <span className="animated fadeIn">Query</span>
           }
         </Menu.Item>
         <Menu.Item
@@ -51,7 +58,7 @@ class MainSidebar extends React.Component {
           <Icon name="file" />
           {
             !isMinify && 
-            <span>Template</span>
+            <span className="animated fadeIn">Template</span>
           }
         </Menu.Item>
         <Menu.Item
@@ -62,7 +69,7 @@ class MainSidebar extends React.Component {
           <Icon name="history" />
           {
             !isMinify && 
-            <span>History</span>
+            <span className="animated fadeIn">History</span>
           }
         </Menu.Item>
       </Sidebar>

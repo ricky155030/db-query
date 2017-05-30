@@ -2,15 +2,24 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Input, Header, Form, TextArea, Button, Divider } from 'semantic-ui-react'
 import Select from 'react-select'
+import { setCreateSQL, setCreateName, setCreateDescription, resetCreateData } from '../../actions/template'
 
 class Create extends React.Component {
   constructor(props) {
     super(props)
   }
 
+  handleNameChange = (e, { value }) => this.props.setCreateName(value)
+
+  handleDescriptionChange = (e, { value }) => this.props.setCreateDescription(value)
+
+  handleSQLChange = (e, { value }) => this.props.setCreateSQL(value)
+
   render() {
     const {
-      query
+      sql,
+      name,
+      description
     } = this.props
 
     return (
@@ -26,24 +35,36 @@ class Create extends React.Component {
           <Form.Group widths="equal">
             <Form.Field>
               <label>Name</label>
-              <Input mini/>
+              <Input 
+                mini 
+                value={name} 
+                onChange={this.handleNameChange} 
+              />
             </Form.Field>
             <Form.Field>
               <label>Description</label>
-              <Input mini/>
+              <Input 
+                mini 
+                value={description} 
+                onChange={this.handleDescriptionChange} 
+              />
             </Form.Field>
           </Form.Group>
           <Form.Field>
             <label>Query</label>
             <TextArea 
-              value={query}
+              value={sql}
               placeholder="Your sql query here" 
+              onChange={this.handleSQLChange}
             />
           </Form.Field>
         </Form>
         <br />
-        <Button floated="right">
-          Save
+        <Button color="blue" floated="right" disabled={!sql || !description || !name}>
+          Submit
+        </Button>
+        <Button floated="right" onClick={this.props.resetCreateData}>
+          Clear
         </Button>
         <Divider horizontal hidden clearing />
       </div>
@@ -52,14 +73,25 @@ class Create extends React.Component {
 }
 
 const mapStateToProps = state => {
+  const {
+    sql,
+    name,
+    description
+  } = state.template.create
+
   return {
-    query: state.sql.query
+    sql,
+    name,
+    description
   }
 }
 
 const dispatchProps = dispatch => {
   return {
-    setCreateQuery: query => dispatch(setCreateQuery(query))
+    setCreateSQL: sql => dispatch(setCreateSQL(sql)),
+    setCreateName: name => dispatch(setCreateName(name)),
+    setCreateDescription: description => dispatch(setCreateDescription(description)),
+    resetCreateData: () => dispatch(resetCreateData()),
   }
 }
 

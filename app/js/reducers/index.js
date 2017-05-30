@@ -1,10 +1,14 @@
 import { combineReducers } from 'redux'
-import { sidebar } from './sidebar'
 import { sql } from './sql'
+import { query } from './query'
+import { sidebar } from './sidebar'
+import { template } from './template'
 
 const RootReducer = combineReducers({
   sql,
-  sidebar
+  query,
+  sidebar,
+  template
 })
 
 export default RootReducer

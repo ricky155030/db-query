@@ -1,9 +1,9 @@
 import { 
-  SET_CREATE_QUERY,
+  SET_QUERY_RESULT,
   RECEIVE_TEMPLATES,
-  RECEIVE_SQL_RESULT,
-  RESET_SQL_RESULT
+  PUSH_HISTORY
 } from '../constants/ActionType'
+import moment from 'moment'
 
 export const requestTemplates = () => dispatch => {
   const data = [
@@ -28,25 +28,30 @@ export const requestTemplates = () => dispatch => {
   return dispatch(receiveTemplates(data))
 }
 
-export const requestSQLResult = sql => dispatch => {
-  return dispatch(receiveSQLResult(sql))
-}
+export const requestSQLResult = (sql, db) => dispatch => {
+  const result = db.map(d => ({
+    db: d,
+    result: `This is query result for ${sql}`,
+    time: parseInt(moment().format('x'))
+  }))
 
-export const setCreateQuery = query => ({
-  type: SET_CREATE_QUERY,
-  query
-})
+  dispatch(receiveQueryResult(result))
+  dispatch(pushHistory(sql, db, result))
+}
 
 const receiveTemplates = templates => ({
   type: RECEIVE_TEMPLATES,
   templates
 })
 
-const receiveSQLResult = result => ({
-  type: RECEIVE_SQL_RESULT,
-  result
+const receiveQueryResult = result => ({
+  type: SET_QUERY_RESULT,
+  result,
 })
 
-export const resetSQLResult = () => ({
-  type: RESET_SQL_RESULT,
+const pushHistory = (sql, db, result) => ({
+  type: PUSH_HISTORY,
+  result,
+  sql,
+  db
 })

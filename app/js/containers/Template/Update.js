@@ -4,16 +4,34 @@ import { Input, Header, Form, TextArea, Button, Divider } from 'semantic-ui-reac
 import Select from 'react-select'
 
 class Update extends React.Component {
+  state = {}
+
   constructor(props) {
     super(props)
   }
+
+  componentDidMount() {
+    const {
+      name,
+      query,
+      description
+    } = this.props.template
+
+    this.setState({ name, query, description })
+  }
+
+  handleNameChange = (e, { value }) => this.setState({ name: value })
+
+  handleDescriptionChange = (e, { value }) => this.setState({ description: value })
+
+  handleSQLChange = (e, { value }) => this.setState({ query: value })
 
   render() {
     const {
       name,
       query,
       description
-    } = this.props.template
+    } = this.state
 
     return (
       <div>
@@ -25,11 +43,11 @@ class Update extends React.Component {
           <Form.Group widths="equal">
             <Form.Field>
               <label>Name</label>
-              <Input mini={true} defaultValue={name}/>
+              <Input mini={true} value={name} onChange={this.handleNameChange}/>
             </Form.Field>
             <Form.Field>
               <label>Description</label>
-              <Input mini={true} defaultValue={description}/>
+              <Input mini={true} value={description} onChange={this.handleDescriptionChange}/>
             </Form.Field>
           </Form.Group>
           <Form.Field>
@@ -37,11 +55,12 @@ class Update extends React.Component {
             <TextArea 
               value={query}
               placeholder="Your sql query here" 
+              onChange={this.handleSQLChange}
             />
           </Form.Field>
         </Form>
         <br />
-        <Button floated="right">
+        <Button color="blue" floated="right" disabled={!query || !name || !description}>
           Save
         </Button>
         <Divider horizontal hidden clearing />

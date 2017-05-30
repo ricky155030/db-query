@@ -63,7 +63,7 @@ class Query extends React.Component {
 
     return (
       <div>
-        <Header as="h2" className="materialize-blue-text text-darken-3">
+        <Header as="h3" className="materialize-blue-text text-darken-3">
           <Icon name="file" circular />
           <Header.Content>
             Template
